@@ -1,10 +1,11 @@
 {
-    "name": "Fredy and Andrew Extension",
-    "description": "not sure yet",
+    "name": "Everything Calculator",
+    "description": "Calculates everything for you",
     "version": "1.0",
     "manifest_version": 3,
-    "background": {
-        "service_worker": "background.js"
+    "author": "Fredy and Andrew",
+    "action": {
+        "default_popup": "popup.html"
     }
 }
 
