@@ -5,7 +5,7 @@
     "manifest_version": 3,
     "author": "Fredy and Andrew",
     "action": {
-        "default_popup": "popup.html"
+        "default_popup": "index.html"
     }
 }
 

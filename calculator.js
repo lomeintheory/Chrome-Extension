@@ -22,6 +22,7 @@ clear() {
 
 
 delete() {
+  this.currentOperand = this.currentOperand.toString().slice(0, -1)
 }
 
 appendNumber(number) {
@@ -65,10 +66,36 @@ compute() {
     this.previousOperand = '';
   }
 
-updateDisplay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
+  updateDisplay() {
+    this.currentOperandTextElement.innerText =
+      this.getDisplayNumber(this.currentOperand)
+    if (this.operation != null) {
+      this.previousOperandTextElement.innerText =
+        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+    } else {
+      this.previousOperandTextElement.innerText = ''
+    }
+  }
+
+  getDisplayNumber(number) {
+    const stringNumber = number.toString()
+    const integerDigits = parseFloat(stringNumber.split('.')[0])
+    const decimalDigits = stringNumber.split('.')[1]
+    let integerDisplay
+    if (isNaN(integerDigits)) {
+      integerDisplay = ''
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`
+    } else {
+      return integerDisplay
+    }
+  }
+
 }
-}
+
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
@@ -93,5 +120,10 @@ equalsButton.addEventListener('click', button => {
 
 allClearButton.addEventListener('click', button => {
   calculator.clear()
+  calculator.updateDisplay()
+})
+
+deleteButton.addEventListener('click', button => {
+  calculator.delete()
   calculator.updateDisplay()
 })
